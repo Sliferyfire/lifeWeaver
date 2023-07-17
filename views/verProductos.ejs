@@ -47,15 +47,15 @@
     </thead>
     <tbody>
         <%
-            usuarios.forEach((usuario)=>{
+        productos.forEach((producto)=>{
         %>
         <tr>
             <td><%= producto.id %></td>
             <td><%= producto.nombre %></td>
-            <td><%= producto.usuario %></td>
-            <td><%= producto.password %></td>
+            <td><%= producto.descripcion %></td>
+            <td><%= producto.precio %></td>
             <td><%= producto.imagen %></td>
-            <td> <a href="/editarUsuario/<%= usuario.id %>">Editar</a> / <a href="/borrarUsuario/<%= usuario.id %>">Borrado fisico</a> / <a href="/borrarUsuario2/<%= usuario.id %>">Borrado logico</a> </td>
+            <td> <a href="/editarUsuario/<%= producto.id %>">Editar</a> / <a href="/borrarUsuario/<%= producto.id %>">Borrado fisico</a> / <a href="/borrarUsuario2/<%= producto.id %>">Borrado logico</a> </td>
             
         </tr>
          <%

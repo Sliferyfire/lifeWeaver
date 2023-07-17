@@ -1,7 +1,7 @@
 var Sequelize = require("sequelize");
 
 module.exports=(conexion)=>{
-    const ProductoSchema=conexion.define("productos",{
+    const ProductoSchema=conexion.define("producto",{
         id:{
             type:Sequelize.INTEGER,
             primaryKey:true,
@@ -20,5 +20,7 @@ module.exports=(conexion)=>{
             type:Sequelize.STRING,
         }
     });
+    console.log("Modelo");
+    console.log(ProductoSchema);
     return ProductoSchema;
 }

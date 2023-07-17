@@ -1,7 +1,7 @@
 var ruta=require("express").Router();
 const { where } = require("sequelize");
 var {Usuario}=require('../conexion');
-var {Producto}=require('../conexion');
+var {Produto}=require('../conexion');
 
 ruta.get("/",(req,res)=>{
     if (req.session.usuario){
@@ -32,19 +32,17 @@ ruta.post("/validar",(req,res)=>{
         req.session.usuario=req.body.usuario;
         res.redirect("/inicioAdmin");
     }else {
-        Usuario.findByPk(1)
-    .then((usuario)=>{
-        if(req.body.usuario==usuario.usuario && req.body.password==usuario.password){
-            req.session.usuario=req.body.usuario;
-            res.redirect("/inicio");
-        }else {
+        Usuario.findAll({where:{usuario:req.body.usuario , password:req.body.password}})
+        .then((usuario)=>{
+            
+                req.session.usuario=req.body.usuario;
+                res.redirect("/inicio");
+            
+        })
+        .catch((err)=>{
+            console.log("Error...." + err);
             res.redirect("/error");
-        }
-    })
-    .catch((err)=>{
-        console.log("Error...." + err);
-        res.redirect("/error");
-    });
+        });
     }
 
 });
@@ -99,9 +97,9 @@ ruta.get("/verUsuarios",(req,res)=>{
 
 ruta.get("/verProductos",(req,res)=>{
     if (req.session.usuario == "admin"){
-        Producto.findAll()
+        Produto.findAll()
         .then((prod)=>{
-            res.render("verProductos",{producto:prod});
+            res.render("verProductos",{productos:prod});
         })
         .catch((err)=>{
             console.log("Error " + err)
@@ -124,7 +122,7 @@ ruta.get("/nuevoProducto",(req,res)=>{
 
 ruta.post("/capturarProducto",(req,res)=>{
     if (req.session.usuario == "admin"){
-        Producto.create(req.body)
+        Produto.create(req.body)
         .then(()=>{
             res.redirect("/verProductos");
         })
