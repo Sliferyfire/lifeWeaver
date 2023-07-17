@@ -1,0 +1,31 @@
+<%- include("templates/encabezado")%>
+
+<body class="formulario">
+    
+    <section>
+        <section class="form__register">
+            <h2>Formulario de Registro</h2>
+            <form action="/capturarUsuario" method="post" id="formulario">
+                <input class="form__controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre" required>
+                    <span id="errornombre"></span>
+                <input class="form__controls" type="text" name="usuario" id="usuario" placeholder="Ingrese su Usuario" required>
+                    <span id="errorapellido"></span>
+                <input class="form__controls" type="email" name="email" id="email" placeholder="Ingrese su Correo" required>
+                    <span id="errorcorreo"></span>
+                <input class="form__controls" type="password" name="password" id="password" placeholder="Ingrese su Contraseña" required>
+                    <span id="errorcontraseña"></span>
+                            <!--<input class="form__controls" type="password" name="confirmar_contraseña" id="confirmar_contraseña" placeholder="Compruebe su contraseña" required>
+                            <span id="errorconfirmar"></span>  -->
+                <p>Estoy de acuerdo con <a href="#">Términos y Condiciones</a></p>
+                <button  class="form__botons" type="submit" onclick="validarFormulario()">Registrar</button>
+            </form>
+            <p><a href="iniciarSesion">¿Ya tengo Cuenta?</a></p>
+        </section>
+    </section>
+
+    <script src="https://kit.fontawesome.com/f890456237.js" crossorigin="anonymous"></script>
+    <script src="/public/js/validacionreg.js"></script>
+    
+
+</body>
+</html>

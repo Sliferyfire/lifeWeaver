@@ -1,0 +1,20 @@
+<%- include("templates/encabezado")%>
+
+<body class="formulario">
+    <section>
+        <section class="form__register">
+            <form action="/validar" method="post">
+                <h2>Iniciar Sesion</h2>
+                <input class="form__controls" type="text" name="usuario" id="usuario" placeholder="Ingrese su Usuario">
+                <span id="mensajemail"></span>
+                <input class="form__controls" type="password" name="password" id="password" placeholder="Ingrese su Contraseña">
+                <span id="mensajecontraseña"></span>
+                <button class="form__botons" type="submit" onclick="validarFormulario()">Ingresar</button>
+            </form>
+            <p><a href="crearSesion">¿No tengo Cuenta?</a></p>
+        </section>
+    </section>
+
+    <script src="https://kit.fontawesome.com/f890456237.js" crossorigin="anonymous"></script>
+</body>
+</html>
