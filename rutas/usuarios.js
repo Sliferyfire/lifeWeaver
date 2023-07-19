@@ -1,7 +1,7 @@
 var ruta=require("express").Router();
 const { where } = require("sequelize");
 var {Usuario}=require('../conexion');
-var {Produto}=require('../conexion');
+var {Producto}=require('../conexion');
 
 ruta.get("/",(req,res)=>{
     if (req.session.usuario){
@@ -97,7 +97,7 @@ ruta.get("/verUsuarios",(req,res)=>{
 
 ruta.get("/verProductos",(req,res)=>{
     if (req.session.usuario == "admin"){
-        Produto.findAll()
+        Producto.findAll()
         .then((prod)=>{
             res.render("verProductos",{productos:prod});
         })
@@ -122,7 +122,7 @@ ruta.get("/nuevoProducto",(req,res)=>{
 
 ruta.post("/capturarProducto",(req,res)=>{
     if (req.session.usuario == "admin"){
-        Produto.create(req.body)
+        Producto.create(req.body)
         .then(()=>{
             res.redirect("/verProductos");
         })
