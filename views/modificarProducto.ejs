@@ -35,64 +35,29 @@
         </div>
       </nav>
 
-      <h1>Mostrar Usuarios</h1>
-<table>
-    <thead>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>Usuario</th>
-        <th>Email</th>
-        <th>Password</th>
-        <th>Editar / Borrar</th>
-    </thead>
-    <tbody>
-        <%
-            usuarios.forEach((usuario)=>{
-        %>
-        <tr>
-            <td><%= usuario.id %></td>
-            <td><%= usuario.nombre %></td>
-            <td><%= usuario.usuario %></td>
-            <td><%= usuario.email %></td>
-            <td><%= usuario.password %></td>
-            <td> <a href="/editarUsuario/<%= usuario.id %>">Editar</a> / <a href="/borrarUsuario/<%= usuario.id %>">Borrar</a> </td>
-            
-        </tr>
-         <%
-         });
-         %>
-    </tbody>
-</table>
-
-
-<style>
-  table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead th {
-  background-color: #f5f5f5;
-  font-weight: bold;
-  padding: 10px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tbody td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-tbody td a {
-  margin-right: 10px;
-}
-
-</style>
+      <h1>Nuevo Producto</h1>
+<form action="/modificarProducto" method="post" id="formulario">
+    <div>
+        <input type="hidden" name="id" id="id" value=<%= producto.id%>>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" value=<%= producto.nombre %> autofocus>
+        <span id="mensajeNombre"></span>
+    </div>
+    <div>
+        <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion" value=<%= producto.descripcion %>>
+        <span id="mensajeUsuario"></span>
+    </div>
+    <div>
+        <input type="text" name="precio" id="precio" placeholder="Precio" value=<%= producto.precio %>>
+        <span id="mensajePassword"></span>
+    </div>
+    <div>
+      <input type="text" name="imagen" id="imagen" placeholder="imagen" value=<%= producto.imagen %>>
+      <span id="mensajePassword"></span>
+  </div>
+    <div>
+        <button type="submit">Modificar Producto</button>
+    </div>
+</form>
 
 
 </body>

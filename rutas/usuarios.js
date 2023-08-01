@@ -136,6 +136,40 @@ ruta.post("/capturarProducto",(req,res)=>{
     } 
 });
 
+ruta.get("/borrarProducto/:id",(req, res)=>{
+    Producto.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/verProductos");
+    })
+    .catch((err)=>{
+        console.log("Error.........." + err);
+        res.redirect("/verProductos");
+    });
+});
+
+ruta.get("/editarProducto/:id",(req,res)=>{
+    Producto.findByPk(req.params.id)
+    .then((producto)=>{
+        res.render("modificarProducto",{producto:producto});
+    })
+    .catch((err)=>{
+        console.log("Error...." + err);
+        res.redirect("/inicioAdmin");
+    });
+    
+});
+
+ruta.post("/modificarProducto",(req, res)=>{
+    Producto.update(req.body, {where:{id:req.body.id}})
+    .then(()=>{
+        res.redirect("/verProductos");
+    })
+    .catch((err)=>{
+        console.log("Error............." +err);
+        res.redirect("/verProductos");
+    });
+});
+
 
 //------------------------------------------------------------------------------------------------------------
 
@@ -150,6 +184,8 @@ ruta.post("/capturarUsuario",(req, res)=>{
     });
     
 });
+
+
 
 
 module.exports=ruta;
