@@ -24,6 +24,24 @@ ruta.get("/registroExito",(req,res)=>{
     res.render("registroExito");
 })
 
+ruta.get("/lifeWeaver",(req,res)=>{
+    if (req.session.usuario){
+        
+        Producto.findAll()
+        .then((prod)=>{
+            res.render("lifeWeaver",{productos:prod});
+        })
+        .catch((err)=>{
+            console.log("Error " + err)
+            res.end();
+        });
+
+    }
+    else {
+        res.redirect("/")
+    }
+})
+
 // -----------------------Inicio Sesion-----------------------------------------------------------------
 
 ruta.post("/validar",(req,res)=>{

@@ -1,0 +1,35 @@
+<%- include("templates/encabezado")%>
+<%- include("templates/menuUsuario")%>
+
+<body>
+
+         <section class="projects">
+            <div class="container">
+                <h2 class="subtitle">Plantas</h2>
+                <div class="projects__grid2">
+    
+                    <%
+                    productos.forEach((producto)=>{
+                     %>
+                        
+                     <article class="projects__item">
+                        <img src=<%= producto.imagen %> class="projects__img">
+                        <div class="projects__hover">
+                            <h2 class="projects__title"><%= producto.nombre %></h2>
+                            <h4 class="projects__title"><%= producto.descripcion %></h4>
+                            <h3 class="projects__title"><%= producto.precio %></h3>
+                            
+                        </div>
+                    </article>
+
+                    <%
+                    });
+                    %>
+    
+                </div>
+            </div>
+        </section>
+
+
+<%- include("templates/footer")%>
+<%- include("templates/pie")%>
