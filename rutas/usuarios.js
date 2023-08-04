@@ -2,6 +2,7 @@ var ruta=require("express").Router();
 const { where } = require("sequelize");
 var {Usuario}=require('../conexion');
 var {Producto}=require('../conexion');
+const usuario = require("../modelos/usuario");
 
 ruta.get("/",(req,res)=>{
     if (req.session.usuario){
@@ -42,11 +43,67 @@ ruta.get("/lifeWeaver",(req,res)=>{
     }
 })
 
+ruta.get("/nosotros",(req,res)=>{
+
+    if (req.session.usuario){
+        
+        Usuario.findByPk(req.params.id)
+        .then((usuario)=>{
+            res.render("nosotros",{usuario:req.session.usuario});
+        })
+        .catch((err)=>{
+            console.log("Error...." + err);
+            res.redirect("/");
+        });
+
+    }
+    else {
+        res.redirect("nosotros")
+    }
+
+})
+
+ruta.get("/editarPerfil",(req,res)=>{
+    if (req.session.usuario){
+        
+        Usuario.findAll({where:{usuario:req.session.usuario}})
+        .then((usu)=>{
+            res.render("editarPerfil",{usuario:usu});
+            //console.log("----------------------------");
+            //console.log(req.session.usuario);
+        })
+        .catch((err)=>{
+            console.log("Error...." + err);
+            res.redirect("/");
+        });
+
+    }
+    else {
+        res.redirect("/")
+    }
+})
+
+ruta.post("/modificarPerfil",(req, res)=>{
+
+    console.log("------------------------");
+    console.log(req.session.usuario);
+
+    Usuario.update(req.body, {where:{usuario:req.session.usuario}})
+    .then(()=>{
+        req.session.usuario=req.body.usuario;
+        res.redirect("/");
+    })
+    .catch((err)=>{
+        console.log("Error............." +err);
+        res.redirect("/");
+    });
+});
+
 // -----------------------Inicio Sesion-----------------------------------------------------------------
 
 ruta.post("/validar",(req,res)=>{
     
-    if(req.body.usuario=="admin" && req.body.password=="12345678"){
+    if(req.body.usuario==="admin" && req.body.password==="12345678"){
         req.session.usuario=req.body.usuario;
         res.redirect("/inicioAdmin");
     }else {
@@ -185,6 +242,40 @@ ruta.post("/modificarProducto",(req, res)=>{
     .catch((err)=>{
         console.log("Error............." +err);
         res.redirect("/verProductos");
+    });
+});
+
+ruta.get("/editarUsuario/:id",(req,res)=>{
+    Usuario.findByPk(req.params.id)
+    .then((usuario)=>{
+        res.render("modificarUsuario",{usuario:usuario});
+    })
+    .catch((err)=>{
+        console.log("Error...." + err);
+        res.redirect("/verUsuarios");
+    });
+    
+});
+
+ruta.post("/modificarUsuario",(req, res)=>{
+    Usuario.update(req.body, {where:{id:req.body.id}})
+    .then(()=>{
+        res.redirect("/verUsuarios");
+    })
+    .catch((err)=>{
+        console.log("Error............." +err);
+        res.redirect("/verUsuarios");
+    });
+});
+
+ruta.get("/borrarUsuario/:id",(req, res)=>{
+    Usuario.destroy({where:{id:req.params.id}})
+    .then(()=>{
+        res.redirect("/verUsuarios");
+    })
+    .catch((err)=>{
+        console.log("Error.........." + err);
+        res.redirect("/verUsuarios");
     });
 });
 

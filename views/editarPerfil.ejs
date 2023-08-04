@@ -1,0 +1,34 @@
+<%- include("templates/encabezado")%>
+<%- include("templates/menuUsuario")%>
+
+<body>
+
+
+<form action="/modificarPerfil" method="post" id="formulario">
+    <h2>Editar Perfil</h2>
+    <div>
+        <input type="text" name="id" id="id" value=<%= usuario.id %>>
+        <input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre" value=<%= usuario.nombre %>>
+        <span id="mensajemail"></span>
+    </div>
+    <div>
+        <input type="text" name="usuario" id="usuario" placeholder="Ingrese su Usuario" value=<%= usuario.usuario %>>
+        <span id="mensajemail"></span>
+    </div>
+    <div>
+        <input type="text" name="email" id="email" placeholder="Ingrese su email" value=<%= usuario.email %>>
+        <span id="mensajemail"></span>
+    </div>
+    <div>
+        <input type="password" name="password" id="password" placeholder="Ingrese su Contraseña" value=<%= usuario.password %>>
+        <span id="mensajecontraseña"></span>
+    </div>
+    <div>
+        <button type="submit" >Modificar Usuario</button>
+    </div>
+    
+</form>
+
+
+<%- include("templates/footer")%>
+<%- include("templates/pie")%>
