@@ -68,7 +68,7 @@ ruta.get("/editarPerfil",(req,res)=>{
         
         Usuario.findAll({where:{usuario:req.session.usuario}})
         .then((usu)=>{
-            res.render("editarPerfil",{usuario:usu});
+            res.render("editarPerfil",{usuario:usu[0]});
             //console.log("----------------------------");
             //console.log(req.session.usuario);
         })
